@@ -19,6 +19,4 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('components/pages/homePage/homePage');
 });
-Route::get('/login', function () {
-    return view('components/pages/loginPage/loginPage');
-});
+
