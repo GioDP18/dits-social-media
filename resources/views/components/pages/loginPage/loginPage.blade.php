@@ -30,9 +30,8 @@
 
     <body>
         {{-- Start you div here --}}
-        <form method="post" action="">
+        <form method="post" action="{{ route('users.authenticate') }}">
             @csrf
-            @method('post')
             <div class="popup">
                 <img src="{{ asset('logo/dits.png') }}" alt="" style="display: block; margin: 0 auto; width: 55px; height: auto; padding-bottom: 10px;">
                 <h4>Sign In</h4>
@@ -52,10 +51,11 @@
                 </div>
                 <button type="submit" class="button type1 mx-auto d-grid gap-2"><span class="btn-txt">Login</span></button>
                 <div style="font-size: 90%; text-align: center;">
-                    <span>New to DITS Social Media?<span> <a href="">Sign up here</a>
+                    <span>New to DITS Social Media?</span> <a href="{{ route('register') }}">Sign up here</a>
                 </div>
             </div>
         </form>
+
 
         <style>
             body {

@@ -21,10 +21,13 @@ Route::get('/home', function () {
     return view('components/pages/homePage/homePage');
 });
 
-
-Route::get('/register', function(){
+Route::get('/register', function () {
     return view('/components/pages/registerPage/registerPage');
+})->name('register');
+
+Route::post('/register', [UserController::class, 'store'])->name('users.store');
+
+Route::get('/login', function(){
+    return view('/components/pages/loginPage/loginPage');
 });
-
-Route::post('/components/pages/registerPage/registerPage', [UserController::class, 'store'])->name('users.store');
-
+Route::post('/login', [UserController::class, 'authenticate'])->name('users.authenticate');

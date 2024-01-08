@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -22,4 +23,25 @@ class UserController extends Controller
        $newTodos = User::create($data);
         return redirect('/');
     }
+
+    // login session
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Attempt to authenticate the user
+        if (auth()->attempt($credentials)) {
+            // Authentication successful
+            return redirect('/')->with('success', 'Login successful!');
+        } else {
+            // Authentication failed
+            return redirect()->back()->with('error', 'Invalid credentials. Please try again.');
+        }
+    }
+
+
 }
+

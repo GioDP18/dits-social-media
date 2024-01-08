@@ -61,7 +61,7 @@
             </div>
             <button type="submit" class="button type1 mx-auto d-grid gap-2"><span class="btn-txt">Register</span></button>
             <div style="font-size: 90%; text-align: center;">
-                <span>Already have an account?<span> <a href="">Login Here!</a>
+                <span>Already have an account?<span> <a href="{{route('users.authenticate')}}">Login Here!</a>
             </div>
         </div>
     </form>
@@ -129,7 +129,7 @@
             border-radius: 30px;
             visibility: hidden;
             height: 10px;
-            width: 10px;  
+            width: 10px;
             z-index: -1;
         }
 
