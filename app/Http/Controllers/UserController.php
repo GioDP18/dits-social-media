@@ -35,12 +35,21 @@ class UserController extends Controller
         // Attempt to authenticate the user
         if (auth()->attempt($credentials)) {
             // Authentication successful
-            return redirect('/')->with('success', 'Login successful!');
+            return redirect('/home')->with('success', 'Login successful!');
         } else {
             // Authentication failed
             return redirect()->back()->with('error', 'Invalid credentials. Please try again.');
         }
     }
+
+    // logout
+    public function logout()
+    {
+        auth()->logout();
+
+        return redirect('/login')->with('success', 'Logout successful!');
+    }
+
 
 
 }

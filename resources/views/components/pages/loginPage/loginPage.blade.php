@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>DITS Social Media</title>
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -34,7 +34,7 @@
             @csrf
             <div class="popup">
                 <img src="{{ asset('logo/dits.png') }}" alt="" style="display: block; margin: 0 auto; width: 55px; height: auto; padding-bottom: 10px;">
-                <h4>Sign In</h4>
+                <h4>Login</h4>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <div class="input-group mb-3">

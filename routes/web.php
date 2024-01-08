@@ -31,3 +31,6 @@ Route::get('/login', function(){
     return view('/components/pages/loginPage/loginPage');
 });
 Route::post('/login', [UserController::class, 'authenticate'])->name('users.authenticate');
+
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
