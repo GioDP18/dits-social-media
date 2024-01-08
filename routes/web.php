@@ -34,3 +34,10 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('users.auth
 
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/update', function(){
+    return view('/components/pages/profilePage/profilePage');
+});
+
+Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
+Route::put('/submit/{id}', [UserController::class, 'saveUpdate'])->name('saveUpdate');
