@@ -37,8 +37,5 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('users.auth
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/profile', function(){
-    return view('/components/pages/profilePage/profilePage');
-});
-Route::get('/update-profile', [PostsController::class, 'editProfile'])->name('editProfile');
-Route::put('update-profile', [PostsController::class, 'updateProfile'])->name('updateProfile');
+Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
+Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');

@@ -43,32 +43,33 @@
             <div class="col-xl-8">
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
-                    <div class="update card-body">
-                        <form id="edit-profile-form" method="POST" action="">
+                    <div class="profile card-body">
+                        <form id="edit-profile-form" method="POST" action="{{ route('submitUpdate', $profile->id) }}"
+                            action="">
                             @csrf
                             @method('PUT')
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputFirstName">First name</label>
                                     <input class="form-control" id="firstName" name="first_name" type="text"
-                                        value="{{ Auth::user()->first_name }}">
+                                        value="{{ $profile->first_name }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLastName">Last name</label>
                                     <input class="form-control" id="last_name" name="last_name" type="text"
-                                        value="{{ Auth::user()->last_name }}">
+                                        value="{{ $profile->last_name }}">
                                 </div>
                             </div>
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputBirthday">Birthday</label>
                                     <input class="form-control" id="birthdate" name="birthdate" type="date"
-                                        value="{{ Auth::user()->birthdate }}">
+                                        value="{{ $profile->birthdate }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="gender">Gender</label>
                                     <div class="form-label">
-                                        @if (Auth::user()->gender == 'male' )
+                                        @if ($profile->gender == 'male' )
                                         <input type="radio" name="gender" class="radio1" value="male" checked> Male
                                         <input type="radio" name="gender" class="radio2" style="margin-left: 3%;"
                                             value="female"> Female
@@ -85,21 +86,23 @@
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i
                                             class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        value="{{ $profile->email }}">
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label class="small mb-1" for="password">Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i
                                             class="fa-solid fa-key"></i></span>
-                                    <input type="password" class="form-control" id="password" name="password" value="{{ Auth::user()->email }}">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        value="{{ $profile->email }}" readonly>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row gx-3">
                                 <div class="col text-end">
                                     <button class="cancel float-right" type="button">Cancel</button>
-                                    <button class="submit save" type="button">Save changes</button>
+                                    <button class="submit save" type="submit">Save changes</button>
                                 </div>
                             </div>
                         </form>
