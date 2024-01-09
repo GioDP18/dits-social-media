@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DITS Social Media</title>
+    <title>DITS SOCIAL MEDIA</title>
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -15,30 +15,39 @@
 </head>
 
 <body>
+
         {{-- Start you div here --}}
-        <form method="post" action="{{ route('users.authenticate') }}">
+        <form method="post" action="{{ route('users.authenticate') }}" style="position:relative">
             @csrf
             <div class="popup">
-                <img src="{{ asset('logo/dits.png') }}" alt="" style="display: block; margin: 0 auto; width: 55px; height: auto; padding-bottom: 10px;">
-                <h4>Login</h4>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="email" class="form-control" id="email" name="email">
+                <div>
+                @if (session('error'))
+                    <div class="alert alert-danger" style="position:absolute; top:-4.5rem; left:0; width:100%">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <small>{{ session('error') }}</small>
+                    </div>
+                @endif
+                    <img src="{{ asset('logo/dits.png') }}" alt="" style="display: block; margin: 0 auto; width: 55px; height: auto; padding-bottom: 10px;">
+                    <h4>Login</h4>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key"></i></span>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>
+                    <button type="submit" class="button type1 mx-auto d-grid gap-2"><span class="btn-txt">Login</span></button>
+                    <div style="font-size: 90%; text-align: center;">
+                        <span>New to DITS Social Media?</span> <a href="{{ route('register') }}">Sign up here</a>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key"></i></span>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                </div>
-                <button type="submit" class="button type1 mx-auto d-grid gap-2"><span class="btn-txt">Login</span></button>
-                <div style="font-size: 90%; text-align: center;">
-                    <span>New to DITS Social Media?</span> <a href="{{ route('register') }}">Sign up here</a>
-                </div>
+
             </div>
         </form>
 
