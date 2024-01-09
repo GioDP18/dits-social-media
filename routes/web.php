@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
-    return view('components/pages/homePage/homePage');
-});
+
+Route::get('/home', [PostsController::class, 'getPosts']);
+Route::post('/uploadPost', [PostsController::class, 'uploadPost']);
+
 
 Route::get('/register', function () {
     return view('/components/pages/registerPage/registerPage');
@@ -34,3 +36,4 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('users.auth
 
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
