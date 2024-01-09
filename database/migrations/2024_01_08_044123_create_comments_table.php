@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('post_id')->constrained();
+            $table->foreignId('users_id')->constrained();
+            $table->foreignId('posts_id')->constrained();
             $table->string('comment');
             $table->string('image');
             $table->timestamps();
