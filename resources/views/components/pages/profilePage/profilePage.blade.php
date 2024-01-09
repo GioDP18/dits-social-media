@@ -30,11 +30,11 @@
                             <p>Name</p>
                         </div>
                         <div>
-                        
-                        <label for="profilePic">
-                            <p class="button">Edit Profile Picture</p>
-                            <input id="profilePic" type="file" hidden>
-                        </label>
+
+                            <label for="profilePic">
+                                <p class="button">Edit Profile Picture</p>
+                                <input id="profilePic" type="file" hidden>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -42,18 +42,18 @@
             <div class="col-xl-8">
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
-                    <div class="card-body">
-                        <form method="POST" action="">
+                    <div class="update card-body">
+                        <form method="POST" action="{{ route('submitupdate',  $profile->id) }}">
+                            @csrf
+                            @method('PUT')
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputFirstName">First name</label>
-                                    <input class="form-control" id="firstName" name="first_name" type="text"
-                                        value="">
+                                    <input class="form-control" id="firstName" name="first_name" type="text" value="{{ $profile->first_name }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="last_name" name="last_name" type="text"
-                                        value="">
+                                    <input class="form-control" id="last_name" name="last_name" type="text" value="">
                                 </div>
                             </div>
                             <div class="row gx-3 mb-3">
@@ -91,7 +91,7 @@
                             <div class="row gx-3">
                                 <div class="col text-end">
                                     <button class="cancel float-right" type="button">Cancel</button>
-                                    <button class="save" type="button">Save changes</button>
+                                    <button class="submit save" type="button">Save changes</button>
                                 </div>
                             </div>
                         </form>
