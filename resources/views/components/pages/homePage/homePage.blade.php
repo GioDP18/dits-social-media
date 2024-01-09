@@ -87,7 +87,7 @@ body::-webkit-scrollbar{
     <div style="position:fixed; z-index:1; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
         <div class="d-flex" style="gap:.5rem;">
             <img src="{{ asset('logo/dits.png') }}" alt="" style="width:3rem; height:3rem; border-radius:5px; box-shadow: 5px 3px 4px #818181;">
-            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS SOCIAL MEDIA</h1>
+            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS TAMBAYAN</h1>
         </div>
         <div style="display:flex; gap:.5rem;">
             <div>
@@ -135,7 +135,8 @@ body::-webkit-scrollbar{
                 <p style="margin:0 1rem;">{{ $post->caption }}</p>
                 <img src="{{ asset('storage/'.$post->image) }}" alt="" style="width:20rem;">
             </div>
-            <div class="comments m-3">
+            <div class="comments m-3 d-flex" style="justify-content:end; gap:1rem;">
+                <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-heart" style="color:red"></i> <span style="width:.3rem;"></span> Likes: {{ $post->likes_count }} </button>
                 <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
             </div>
         </div>
@@ -166,11 +167,11 @@ body::-webkit-scrollbar{
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="caption" class="form-label">Caption</label>
-                                <textarea class="form-control" name="caption" id="caption" rows="2"></textarea>
+                                <label for="caption" class="form-label" style="font-weight:bold">Caption</label>
+                                <textarea class="form-control" name="caption" id="caption" rows="2" placeholder="What do you think?"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="image" class="form-label">Upload Image</label>
+                                <label for="image" class="form-label" style="font-weight:bold">Upload Image</label>
                                 <input type="file" class="form-control" name="image" id="image" accept="image/jpeg, image/png, image/jpg, image/gif"/>
                             </div>
                         </div>

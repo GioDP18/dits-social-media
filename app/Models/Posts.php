@@ -13,11 +13,16 @@ class Posts extends Model
         'id',
         'users_id',
         'caption',
-        'image'
+        'image',
+        'created_at'
     ];
 
     public function users(){
         return $this->belongsTo(User::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Likes::class);
     }
 
     public function comments(){
