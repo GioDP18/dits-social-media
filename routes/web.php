@@ -37,3 +37,5 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('users.auth
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
+Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
+Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');
