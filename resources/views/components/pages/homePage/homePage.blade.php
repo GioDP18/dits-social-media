@@ -71,7 +71,7 @@ body::-webkit-scrollbar{
   box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
 }
 </style>
-<body>
+<body style="background-color:#13253D">
     {{-- Check errors for uploading posts --}}
     @if($errors->any())
         <ul>
@@ -84,13 +84,14 @@ body::-webkit-scrollbar{
 
 
 
-    <div style="position:fixed; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
-        <div>
+    <div style="position:fixed; z-index:1; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
+        <div class="d-flex" style="gap:.5rem;">
+            <img src="{{ asset('logo/dits.png') }}" alt="" style="width:3rem; height:3rem; border-radius:5px; box-shadow: 5px 3px 4px #818181;">
             <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS SOCIAL MEDIA</h1>
         </div>
         <div style="display:flex; gap:.5rem;">
             <div>
-                <h5>Gio Dela Pena</h5>
+                <h5 style="color:#13253D;">Gio Dela Pena</h5>
             </div>
             <div style="position:relative; cursor:pointer;" onclick="triggerProfileOptions()">
                 <img src="" alt="" style="border-radius:50%; width:2rem; height:2rem;">
@@ -98,14 +99,20 @@ body::-webkit-scrollbar{
                     <div style="position:absolute; background-color:gray; width:1rem; height:1rem; top:-.5rem; right:.7rem; transform:rotate(135deg)"></div>
                     <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="/profile" style="text-decoration:none; color:white;">Profile</a></li>
                     <hr class="m-0">
-                    <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-right-from-bracket"></i> <a href="/logout" style="text-decoration:none; color:white;">Logout</a></li>
+                    <li style="list-style:none; padding:.5rem;">
+                        <form method="post" action="{{ route('logout') }}">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" style="background-color:transparent; border:none; color:white; display:flex; gap:5px; text-align:right; align-items:center;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                        </form>
+                    </li>
                 </div>
             </div>
         </div>
     </div>
 
     <div style="height:5rem;" id="add"></div>
-    <div style="margin: 1rem 1rem;">
+    <div style="margin:1rem 1rem;">
         {{-- All Buttons here --}}
         <!-- Button for Adding New Post -->
         <button ype="button" class="cssbuttons-io-button" data-bs-toggle="modal" data-bs-target="#addPost">
@@ -113,11 +120,11 @@ body::-webkit-scrollbar{
         </button>
     </div>
 
-    <div class="posts-div" style="display:flex; justify-content:center; flex-direction:column" style="position:relative">
+    <div class="posts-div" style="display:flex; justify-content:center; flex-direction:column; margin-bottom:1rem;">
         @foreach ($posts as $post)
-        <div class="each-post" style="box-shadow: 5px 3px 4px #818181; width:90%; margin:auto; margin-top:1rem; border-radius:15px;">
+        <div class="each-post" style="background-color:white; box-shadow: 5px 3px 4px #818181; width:90%; margin:auto; margin-top:1rem; border-radius:15px;">
             <div class="uploader d-flex p-3 pb-0" style="align-items:center; gap:.8rem;">
-                <img src="" alt="" style="border-radius:50%; width:2.2rem; height:2.2rem;">
+                <img src="{{ $post->image }}" alt="" style="border-radius:50%; width:2.2rem; height:2.2rem;">
                 <div style="display:flex; flex-direction:column">
                     <span style="font-weight:bold; font-size:1.2rem;">{{ $post->users->first_name }} {{ $post->users->last_name }}</span>
                     <small style="font-size:.8rem;"><i class="fa-solid fa-clock"></i> {{ $post->created_at->format('g:ia F j, Y') }}</small>
@@ -133,7 +140,7 @@ body::-webkit-scrollbar{
             </div>
         </div>
         @endforeach
-        <div style="position: fixed; display:flex; justify-content:center; align-items:center; background-color:rgb(52, 34, 185); border-radius:5px; bottom: 3rem; right: 3.2rem; width: 2rem; height: 2rem; transform: rotate(45deg);">
+        <div style="position: fixed; display:flex; justify-content:center; align-items:center; background-color:#6B63D3; border-radius:5px; bottom: 3rem; right: 3.2rem; width: 2rem; height: 2rem; transform: rotate(45deg);">
             <a href="#add" style="scroll-behavior:smooth;"><i class="fa-solid fa-arrow-up" style="transform:rotate(-45deg); color:white;"></i></a>
         </div>
     </div>
@@ -176,12 +183,6 @@ body::-webkit-scrollbar{
             </div>
         </div>
 
-        <div class="d-flex justify-content-end">
-            <form method="post" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-danger">Log out</button>
-            </form>
-        </div>
 
     </div>
 
