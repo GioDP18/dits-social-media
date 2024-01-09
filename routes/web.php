@@ -39,3 +39,4 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
 Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');
+Route::get('/profile-timeline/{id}', [UserController::class, 'profileTimeline'])->name('timeline');

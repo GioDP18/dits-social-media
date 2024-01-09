@@ -44,6 +44,11 @@ class UserController extends Controller
         }
     }
 
+    public function profileTimeline($id)
+    {
+        $profile = User::find($id);
+        return view('/components/pages/profilePage/profileTimeline', compact('profile'));
+    }
     public function updateProfile($id)
     {
         $profile = User::find($id);
@@ -57,9 +62,9 @@ class UserController extends Controller
         $profile->gender = $request->gender;
         $profile->birthdate = $request->birthdate;
         $profile->email = $request->email;
-        $profile->password = $request->password;
+        // $profile->password = $request->password;
         $profile->save();
-        return redirect('/home');
+        return redirect('/profile-timeline/' . $profile->id);
     }
 
     // logout

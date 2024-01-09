@@ -96,7 +96,7 @@ body::-webkit-scrollbar{
                 <img src="{{ asset('storage/profile_images/'.Auth::user()->image) }}" alt="" style="border-radius:50%; width:2rem; height:2rem;">
                 <div id="profileOptions" style="display:none; position:absolute; background-color:gray; top:3rem; right:0; width:7rem; color:white; padding:0 .5rem; border-radius:10px;">
                     <div style="position:absolute; background-color:gray; width:1rem; height:1rem; top:-.5rem; right:.7rem; transform:rotate(135deg)"></div>
-                    <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="{{ route('update',  Auth::user()->id) }}" style="text-decoration:none; color:white;">Profile</a></li>
+                    <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="{{ route('timeline',  Auth::user()->id) }}" style="text-decoration:none; color:white;">Profile</a></li>
                     <hr class="m-0">
                     <li style="list-style:none; padding:.5rem;">
                         <form method="post" action="{{ route('logout') }}">
