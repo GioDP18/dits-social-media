@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +21,6 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('components/pages/homePage/homePage');
 });
+Route::get('comments/{id}', [CommentsController::class, 'retrieveComments'])->name('comments');
+Route::post('send/comment', [CommentsController::class, 'sendComment'])->name('sendComment');
+Route::get('profile/{id}', [PostsController::class, 'visitProfile'])->name('visitProfile');
