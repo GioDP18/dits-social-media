@@ -46,7 +46,7 @@
                 <button type="submit" class="button type1 mx-auto d-grid gap-2"><span
                         class="btn-txt">Login</span></button>
                 <div style="font-size: 90%; text-align: center;">
-                    <span>New to DITS Social Media?</span> <a href="{{ route('register') }}">Sign up here</a>
+                    <span>New to DITS Social Media?</span> <a href="{{ route('register') }}">Sign up</a>
                 </div>
                 <div class="bg-stars">
                     <span class="star"></span>
@@ -536,10 +536,6 @@
 </body>
 
 </html>
-z
-
-
-
 
 {{-- Bootstrap --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
