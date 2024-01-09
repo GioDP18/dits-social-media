@@ -19,7 +19,7 @@
         @csrf
         @method('post')
         <div class="popup">
-            <img src="{{ asset('logo/dits.png') }}" alt="DITS Social Media" style="display: block; margin: 0 auto; width: 55px; height: auto; padding-bottom: 10px;">
+            <img src="{{ asset('logo/dits.png') }}" alt="DITS Social Media" style="display: block; margin: 0 auto; width: 60px; height: auto; padding-bottom: 10px;">
             <h4>Sign Up</h4>
             <div class="row">
                 <div class="mb-3 col">
@@ -52,16 +52,20 @@
                 </div>
                 <div class="mb-3 col">
                     <label for="gender" class="form-label">Gender</label>
-                    <div class="form-label">
-                        <input type="radio" name="gender" class="radio1" value="male"> Male
-                        <input type="radio" name="gender" class="radio2" style="margin-left: 3%;" value="female">
+                    <div class="form-label row">
+                        <div style="border: 1px solid #667281; border-radius: 5px; background-color: #253d5b; width: 42%; height: 38px; text-align: center; margin-left: 5%; margin-right: 5%; padding-top: 1.8%">
+                            <input type="radio" name="gender" class="radio1 col" style="margin-top: 10%" value="male"> Male
+                        </div>
+                        <div style="border: 1px solid #667281; border-radius: 5px; background-color: #253d5b; width: 42%; height: 38px; text-align: center; padding-top: 1.8%">
+                            <input type="radio" name="gender" class="radio2 col" style="margin-top: 10%" value="female">
                         Female
+                        </div>
                     </div>
                 </div>
             </div>
             <button type="submit" class="button type1 mx-auto d-grid gap-2"><span class="btn-txt">Register</span></button>
             <div style="font-size: 90%; text-align: center;">
-                <span>Already have an account?<span> <a href="{{route('users.authenticate')}}">Login Here!</a>
+                <span>Already have an account?<span> <a href="{{route('users.authenticate')}}">Login</a>
             </div>
         </div>
     </form>
@@ -79,7 +83,7 @@
             background-color: #f2f2f2;
             border-radius: 5px;
             padding: 20px;
-            box-shadow: 0px 0px 10px 0px rgb(255, 255, 255);
+            box-shadow: 0px 0px 10px 0px rgb(0, 238, 255);
             background: transparent;
             backdrop-filter: blur(10px);
             border: 1px solid gray;
@@ -90,6 +94,7 @@
         h4 {
             text-align: center;
             margin-bottom: 4%;
+            font-weight: 700;
         }
 
         form {
@@ -108,15 +113,15 @@
             border-radius: 30px;
             color: #ffffff;
             transition: all 0.3s ease-in-out;
-            margin-bottom: 5%;
-            margin-top: 3%;
+            margin-bottom: 3%;
+            margin-top: 1%;
         }
 
         .btn-txt {
             z-index: 1;
             font-weight: 800;
             letter-spacing: 5px;
-            margin-top: 2%;
+            margin-top: 1.5%;
         }
 
         .type1::after {
@@ -125,7 +130,7 @@
             left: 0;
             top: 0;
             transition: all 0.3s ease-in-out;
-            background-color: #ffffff;
+            background-color: white;
             border-radius: 30px;
             visibility: hidden;
             height: 10px;
