@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Likes;
 use App\Models\User;
 
 use App\Models\Posts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -19,8 +22,9 @@ class PostsController extends Controller
 
     public function getPosts(){
         $posts = Posts::with(['users', 'comments', 'likes'])->withCount('comments', 'likes')->orderBy('created_at', 'DESC')->get();
-        // dd($posts);
-        return view('components/pages/homePage/homepage', ['posts' => $posts]);
+        $checkIfLiked = Likes::where('users_id', Auth::user()->id)->get();
+        // dd($checkIfLiked);
+        return view('components/pages/homePage/homepage', ['posts' => $posts, 'checkIfLiked' => $checkIfLiked]);
     }
 
 
