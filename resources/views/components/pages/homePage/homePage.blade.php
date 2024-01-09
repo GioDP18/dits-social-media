@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>DITS SOCIAL MEDIA</title>
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     {{-- Font Awesome --}}
@@ -91,10 +91,10 @@ body::-webkit-scrollbar{
         </div>
         <div style="display:flex; gap:.5rem;">
             <div>
-                <h5 style="color:#13253D;">Gio Dela Pena</h5>
+                <h5 style="color:#13253D;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
             </div>
             <div style="position:relative; cursor:pointer;" onclick="triggerProfileOptions()">
-                <img src="" alt="" style="border-radius:50%; width:2rem; height:2rem;">
+                <img src="{{ asset('storage/profile_images/'.Auth::user()->image) }}" alt="" style="border-radius:50%; width:2rem; height:2rem;">
                 <div id="profileOptions" style="display:none; position:absolute; background-color:gray; top:3rem; right:0; width:7rem; color:white; padding:0 .5rem; border-radius:10px;">
                     <div style="position:absolute; background-color:gray; width:1rem; height:1rem; top:-.5rem; right:.7rem; transform:rotate(135deg)"></div>
                     <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="/profile" style="text-decoration:none; color:white;">Profile</a></li>
@@ -156,7 +156,7 @@ body::-webkit-scrollbar{
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="/uploadPost" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="users_id" value="1">
+                    <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
                     @csrf
                     @method('POST')
                     <div class="modal-content">
