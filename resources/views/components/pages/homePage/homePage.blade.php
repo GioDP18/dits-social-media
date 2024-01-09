@@ -175,6 +175,14 @@ body::-webkit-scrollbar{
                 </form>
             </div>
         </div>
+
+        <div class="d-flex justify-content-end">
+            <form method="post" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-danger">Log out</button>
+            </form>
+        </div>
+
     </div>
 
     <script>
