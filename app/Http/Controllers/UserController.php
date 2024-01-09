@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -27,14 +28,15 @@ class UserController extends Controller
     // login session
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        // $credentials = $request->validate([
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        // ]);
 
         // Attempt to authenticate the user
-        if (auth()->attempt($credentials)) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication successful
+            $request->session()->regenerate();
             return redirect('/home')->with('success', 'Login successful!');
         } else {
             // Authentication failed

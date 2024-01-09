@@ -17,8 +17,8 @@ class CommentsFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 10),
-            'post_id' => $this->faker->numberBetween(1, 10),
+            'users_id' => $this->faker->numberBetween(1, 10),
+            'posts_id' => $this->faker->numberBetween(1, 10),
             'comment' => $this->faker->sentence(),
             'image' => $this->faker->imageUrl()
         ];
