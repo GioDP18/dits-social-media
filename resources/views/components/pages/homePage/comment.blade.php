@@ -32,7 +32,7 @@
                                         <img src="{{$user->image}}" alt="image" style="width:2rem; height:2rem; border-radius:100%;">
                                     
                                     
-                                        <small style="font-size: 0.2;">{{$user->firs_name}} {{$user->last_name}}</small>
+                                        <small style="font-size: 0.2;">{{$user->first_name}} {{$user->last_name}}</small>
                                     </a>
                                 </div>
                                 <div>
@@ -62,8 +62,17 @@
                         <div class="card-content comment-content">
                             @foreach ($comments as $comment)
                             <div class="comment py-4 border-bottom border-dark">
+                                <div class="d-flex align-items-center mb-2">
+                                    <a href="#" class="link-offset-2 link-underline link-underline-opacity-0">
+                                        <img src="{{$comment->users->image}}" alt="image" style="width:2rem; height:2rem; border-radius:100%;">
+                                        <small style="font-size: 0.2;">{{$comment->users->first_name}} {{$comment->users->last_name}}</small>
+                                    </a>
+                                </div>
+
                                 <p>{{$comment->comment}}</p>
+                                @if ($comment->image != " ")
                                 <img class="img-thumbnail" src="{{$comment->image}}" alt="image">
+                                @endif
                                 <div class="d-flex justify-content-end">
                                     <small style="font-size: 10px;">{{$comment->created_at}}</small>
                                 </div>
@@ -85,7 +94,7 @@
                                 <input type="text" name="comment" class="form-control" placeholder="Comment...." aria-label="comment" aria-describedby="button-addon2">
                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Send</button>
                             </div>
-                            <input type="file" name="image">
+                            <input type="file" name="image" >
                             
                                 
                         </form>
