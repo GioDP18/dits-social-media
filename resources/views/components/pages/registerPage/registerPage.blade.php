@@ -54,10 +54,10 @@
                     <label for="gender" class="form-label">Gender</label>
                     <div class="form-label row">
                         <div style="border: 1px solid #667281; border-radius: 5px; background-color: #253d5b; width: 42%; height: 38px; text-align: center; margin-left: 5%; margin-right: 5%; padding-top: 1.8%">
-                            <input type="radio" name="gender" class="radio1 col" style="margin-top: 10%" value="male"> Male
+                            <input type="radio" style="cursor: pointer;" name="gender" class="radio1 col" style="margin-top: 10%" value="male"> Male
                         </div>
                         <div style="border: 1px solid #667281; border-radius: 5px; background-color: #253d5b; width: 42%; height: 38px; text-align: center; padding-top: 1.8%">
-                            <input type="radio" name="gender" class="radio2 col" style="margin-top: 10%" value="female">
+                            <input type="radio" style="cursor: pointer;" name="gender" class="radio2 col" style="margin-top: 10%" value="female">
                         Female
                         </div>
                     </div>
