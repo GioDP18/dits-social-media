@@ -9,6 +9,7 @@ use Symfony\Polyfill\Intl\Idn\Idn;
 
 class CommentsController extends Controller
 {
+
     public function retrieveComments($id){
         $comments = Posts::orderBy('created_at', 'DESC')->find($id)->comments;
         $post = Posts::find($id);

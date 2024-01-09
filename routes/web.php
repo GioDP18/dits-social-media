@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +15,34 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function(){
+    return view('/components/pages/loginPage/loginPage');
+})->name('login');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/home', [PostsController::class, 'getPosts']);
+    Route::post('/uploadPost', [PostsController::class, 'uploadPost']);
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
-Route::get('/home', function () {
-    return view('components/pages/homePage/homePage');
-});
+
 Route::get('comments/{id}', [CommentsController::class, 'retrieveComments'])->name('comments');
 Route::post('send/comment', [CommentsController::class, 'sendComment'])->name('sendComment');
 Route::get('profile/{id}', [PostsController::class, 'visitProfile'])->name('visitProfile');
+
+
+
+Route::get('/register', function () {
+    return view('/components/pages/registerPage/registerPage');
+})->name('register');
+
+Route::post('/register', [UserController::class, 'store'])->name('users.store');
+
+
+Route::post('/login', [UserController::class, 'authenticate'])->name('users.authenticate');
+
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
+Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');
+
