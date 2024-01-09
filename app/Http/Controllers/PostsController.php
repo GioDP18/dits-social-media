@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 
 use App\Models\Posts;
 use Carbon\Carbon;
@@ -8,6 +9,14 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+
+    public function visitProfile($id){
+
+        $user = User::find($id);
+        $posts = User::find($id)->posts;
+        return view('components/pages/visitPage/visitProfile', ['user'=>$user, 'posts'=>$posts]);
+    }
+
     public function getPosts(){
         $posts = Posts::with(['users', 'comments', 'likes'])->withCount('comments', 'likes')->orderBy('created_at', 'DESC')->get();
         // dd($posts);
@@ -35,5 +44,6 @@ class PostsController extends Controller
         ]);
 
         return redirect('/home');
+
     }
 }

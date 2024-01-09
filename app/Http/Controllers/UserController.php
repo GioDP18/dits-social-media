@@ -12,16 +12,16 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-       $data = $request -> validate([
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'email'=> 'required',
-        'password'=> 'required',
-        'gender'=> 'required',
-        'birthdate' => 'required',
-       ]);
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'gender' => 'required',
+            'birthdate' => 'required',
+        ]);
 
-       $newTodos = User::create($data);
+        $newTodos = User::create($data);
         return redirect('/');
     }
 
@@ -42,6 +42,24 @@ class UserController extends Controller
             // Authentication failed
             return redirect()->back()->with('error', 'Invalid credentials. Please try again.');
         }
+    }
+
+    public function updateProfile($id)
+    {
+        $profile = User::find($id);
+        return view('/components/pages/profilePage/profilePage', compact('profile'));
+    }
+    public function submitupdateProfile(Request $request, $id)
+    {
+        $profile = User::find($id);
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
+        $profile->gender = $request->gender;
+        $profile->birthdate = $request->birthdate;
+        $profile->email = $request->email;
+        $profile->password = $request->password;
+        $profile->save();
+        return redirect('/home');
     }
 
     // logout

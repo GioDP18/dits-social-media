@@ -87,7 +87,7 @@ body::-webkit-scrollbar{
     <div style="position:fixed; z-index:1; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
         <div class="d-flex" style="gap:.5rem;">
             <img src="{{ asset('logo/dits.png') }}" alt="" style="width:3rem; height:3rem; border-radius:5px; box-shadow: 5px 3px 4px #818181;">
-            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS TAMBAYAN</h1>
+            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS SOCIAL MEDIA</h1>
         </div>
         <div style="display:flex; gap:.5rem;">
             <div>
@@ -97,7 +97,7 @@ body::-webkit-scrollbar{
                 <img src="{{ asset('storage/profile_images/'.Auth::user()->image) }}" alt="" style="border-radius:50%; width:2rem; height:2rem;">
                 <div id="profileOptions" style="display:none; position:absolute; background-color:gray; top:3rem; right:0; width:7rem; color:white; padding:0 .5rem; border-radius:10px;">
                     <div style="position:absolute; background-color:gray; width:1rem; height:1rem; top:-.5rem; right:.7rem; transform:rotate(135deg)"></div>
-                    <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="/profile" style="text-decoration:none; color:white;">Profile</a></li>
+                    <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="{{ route('update',  Auth::user()->id) }}" style="text-decoration:none; color:white;">Profile</a></li>
                     <hr class="m-0">
                     <li style="list-style:none; padding:.5rem;">
                         <form method="post" action="{{ route('logout') }}">
@@ -145,11 +145,6 @@ body::-webkit-scrollbar{
             <a href="#add" style="scroll-behavior:smooth;"><i class="fa-solid fa-arrow-up" style="transform:rotate(-45deg); color:white;"></i></a>
         </div>
     </div>
-
-
-
-
-
     <div>
         {{-- All Modal Here --}}
         <!-- Modal for Adding New Post -->
