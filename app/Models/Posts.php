@@ -11,26 +11,22 @@ class Posts extends Model
 {
     use HasFactory;
 
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comments::class);
-    }
-
-    public function users(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
 
     protected $fillable = [
         'id',
         'users_id',
         'caption',
-        'image'
+        'image',
+        'created_at'
     ];
 
     public function users(){
         return $this->belongsTo(User::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Likes::class);
     }
 
     public function comments(){

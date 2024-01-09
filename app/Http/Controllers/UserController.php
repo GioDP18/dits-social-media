@@ -67,7 +67,7 @@ class UserController extends Controller
     {
         auth()->logout();
 
-        return redirect('/login')->with('success', 'Logout successful!');
+        return redirect('/')->with('success', 'Logout successful!');
     }
 
 
