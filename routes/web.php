@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
+Route::get('comments/{id}', [CommentsController::class, 'retrieveComments'])->name('comments');
+Route::post('send/comment', [CommentsController::class, 'sendComment'])->name('sendComment');
+Route::get('profile/{id}', [PostsController::class, 'visitProfile'])->name('visitProfile');
+
+
 
 Route::get('/register', function () {
     return view('/components/pages/registerPage/registerPage');
@@ -39,3 +45,4 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
 Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');
+
