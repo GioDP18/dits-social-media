@@ -81,9 +81,6 @@ body::-webkit-scrollbar{
         </ul>
     @endif
     {{-- Start you div here --}}
-
-
-
     <div style="position:fixed; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
         <div>
             <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS SOCIAL MEDIA</h1>
@@ -137,11 +134,6 @@ body::-webkit-scrollbar{
             <a href="#add" style="scroll-behavior:smooth;"><i class="fa-solid fa-arrow-up" style="transform:rotate(-45deg); color:white;"></i></a>
         </div>
     </div>
-
-
-
-
-
     <div>
         {{-- All Modal Here --}}
         <!-- Modal for Adding New Post -->

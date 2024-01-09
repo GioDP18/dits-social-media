@@ -27,7 +27,8 @@
                         <img class="img-account-profile rounded-circle mb-2"
                             src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                         <div class="font-italic text-muted mb-4">
-                            <p>Name</p>
+                            <p class="user_name">{{ Auth::user()->first_name }} <span>{{ Auth::user()->last_name
+                                    }}</span> </p>
                         </div>
                         <div>
 
@@ -43,32 +44,39 @@
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
                     <div class="update card-body">
-                        <form method="POST" action="{{ route('submitupdate',  $profile->id) }}">
+                        <form id="edit-profile-form" method="POST" action="">
                             @csrf
                             @method('PUT')
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputFirstName">First name</label>
-                                    <input class="form-control" id="firstName" name="first_name" type="text" value="{{ $profile->first_name }}">
+                                    <input class="form-control" id="firstName" name="first_name" type="text"
+                                        value="{{ Auth::user()->first_name }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputLastName">Last name</label>
-                                    <input class="form-control" id="last_name" name="last_name" type="text" value="">
+                                    <input class="form-control" id="last_name" name="last_name" type="text"
+                                        value="{{ Auth::user()->last_name }}">
                                 </div>
                             </div>
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="inputBirthday">Birthday</label>
                                     <input class="form-control" id="birthdate" name="birthdate" type="date"
-                                        value="06/10/1988">
+                                        value="{{ Auth::user()->birthdate }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="gender">Gender</label>
                                     <div class="form-label">
+                                        @if (Auth::user()->gender == 'male' )
+                                        <input type="radio" name="gender" class="radio1" value="male" checked> Male
+                                        <input type="radio" name="gender" class="radio2" style="margin-left: 3%;"
+                                            value="female"> Female
+                                        @else
                                         <input type="radio" name="gender" class="radio1" value="male"> Male
                                         <input type="radio" name="gender" class="radio2" style="margin-left: 3%;"
-                                            value="female">
-                                        Female
+                                            value="female" checked> Female
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +85,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i
                                             class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" class="form-control" id="email" name="email">
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -85,7 +93,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><i
                                             class="fa-solid fa-key"></i></span>
-                                    <input type="password" class="form-control" id="password" name="password">
+                                    <input type="password" class="form-control" id="password" name="password" value="{{ Auth::user()->email }}">
                                 </div>
                             </div>
                             <div class="row gx-3">
@@ -112,6 +120,16 @@
             form {
                 display: flex;
                 flex-direction: column;
+            }
+
+            label {
+                font-weight: bold;
+                color: gray;
+            }
+
+            .user_name {
+                font-weight: bold;
+                font-size: 1.5em;
             }
 
             .button {
