@@ -273,6 +273,7 @@
             animation-duration: 1.9s;
         }
     </style>
+    
     <script>
         window.requestAnimFrame = function() {
             return (
