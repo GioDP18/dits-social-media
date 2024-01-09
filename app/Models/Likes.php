@@ -9,4 +9,12 @@ class Likes extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'users_id',
+        'posts_id'
+    ];
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }
