@@ -34,9 +34,11 @@
                 </div>
                 <div class="profile-cover__info">
                     <ul class="nav">
-                        <li><strong>0</strong>Posts</li>
-                        <li><strong>0</strong>Likes</li>
-                        <li><strong>0</strong>Comments</li>
+                    @foreach ($posts as $post)
+                        <li><strong>{{ $post->posts_count }}</strong>Posts</li>
+                        <li><strong>{{ $post->likes_count }}</strong>Likes</li>
+                        <li><strong>{{ $post->comments_count }}</strong>Comments</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -86,7 +88,7 @@
                                 </p>
                             </div>
                             <div class="activity__list__footer">
-                                <a href="#"> <i class="fa fa-thumbs-up"></i>0</a>
+                                <a href="#"> <i class="fa fa-thumbs-up"></i>{{ $post->likes_count }}</a>
                                 <a href="#"> <i class="fa fa-comments"></i>{{ $post->comments_count }}</a>
                                 <span> <i class="fa fa-clock"></i>{{ $post->created_at->format('g:ia F j, Y') }}</span>
                             </div>
