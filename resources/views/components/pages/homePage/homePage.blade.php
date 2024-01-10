@@ -84,9 +84,12 @@ body::-webkit-scrollbar{
 
 
 
-    <div style="position:fixed; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
-        <div>
-            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS SOCIAL MEDIA</h1>
+    <div style="position:fixed; z-index:1; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
+        <div class="d-flex" style="gap:.5rem;">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('logo/dits.png') }}" alt="" style="width:3rem; height:3rem; border-radius:5px; box-shadow: 5px 3px 4px #818181;">
+            </a>
+            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS TAMBAYAN</h1>
         </div>
         <div style="display:flex; gap:.5rem;">
             <div>
@@ -123,7 +126,7 @@ body::-webkit-scrollbar{
         @foreach ($posts as $post)
         <div class="each-post" style="background-color:white; box-shadow: 5px 3px 4px #818181; width:90%; margin:auto; margin-top:1rem; border-radius:15px;">
             <div class="uploader d-flex p-3 pb-0" style="align-items:center; gap:.8rem;">
-                <img src="{{ $post->image }}" alt="" style="border-radius:50%; width:2.2rem; height:2.2rem;">
+                <img src="{{ $post->users->image }}" alt="" style="border-radius:50%; width:2.2rem; height:2.2rem;">
                 <div style="display:flex; flex-direction:column">
                     <span style="font-weight:bold; font-size:1.2rem;">{{ $post->users->first_name }} {{ $post->users->last_name }}</span>
                     <small style="font-size:.8rem;"><i class="fa-solid fa-clock"></i> {{ $post->created_at->format('g:ia F j, Y') }}</small>
@@ -134,7 +137,23 @@ body::-webkit-scrollbar{
                 <p style="margin:0 1rem;">{{ $post->caption }}</p>
                 <img src="{{ asset('storage/'.$post->image) }}" alt="" style="width:20rem;">
             </div>
-            <div class="comments m-3">
+            <div class="comments m-3 d-flex" style="justify-content:end; gap:1rem;">
+                <form action="{{ route('like') }}" method="post">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="users_id" id="" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="posts_id" id="" value="{{ $post->id }}">
+                    <button type="submit" name="like" class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'">
+                        <i class="fa-solid fa-heart"
+                        @foreach ($checkIfLiked as $checkedIfLiked)
+                        @if ($checkedIfLiked->posts_id == $post->id)
+                             style="color:red"
+                        @endif
+                        @endforeach
+                        ></i>
+                        <span style="width:.3rem;"></span> Likes: {{ $post->likes_count }}
+                    </button>
+                </form>
                 <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
             </div>
         </div>
@@ -160,11 +179,11 @@ body::-webkit-scrollbar{
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="caption" class="form-label">Caption</label>
-                                <textarea class="form-control" name="caption" id="caption" rows="2"></textarea>
+                                <label for="caption" class="form-label" style="font-weight:bold">Caption</label>
+                                <textarea class="form-control" name="caption" id="caption" rows="2" placeholder="What do you think?"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="image" class="form-label">Upload Image</label>
+                                <label for="image" class="form-label" style="font-weight:bold">Upload Image</label>
                                 <input type="file" class="form-control" name="image" id="image" accept="image/jpeg, image/png, image/jpg, image/gif"/>
                             </div>
                         </div>
