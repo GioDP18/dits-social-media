@@ -55,16 +55,18 @@
                 <div class="mb-3 col">
                     <label for="gender" class="form-label">Gender</label>
                     <div class="form-label row">
-                        <div
-                            style="border: 1px solid #667281; border-radius: 5px; background-color: #253d5b; width: 42%; height: 38px; text-align: center; margin-left: 5%; margin-right: 5%; padding-top: 1.8%;">
-                            <input type="radio" style="cursor: pointer;" name="gender" class="radio1 col"
-                                style="margin-top: 10%" value="male"> Male
-                        </div>
-                        <div
-                            style="border: 1px solid #667281; border-radius: 5px; background-color: #253d5b; width: 42%; height: 38px; text-align: center; padding-top: 1.8%;">
-                            <input type="radio" style="cursor: pointer;" name="gender" class="radio2 col"
-                                style="margin-top: 10%" value="female">
-                            Female
+                        <div class="radio-group">
+                            <input type="radio" id="radio1" name="gender" class="radio-input" value="male">
+                            <label for="radio1" class="radio-label" style="margin-right: 10%;">
+                                <span class="radio-inner-circle"></span>
+                                Male
+                            </label>
+
+                            <input type="radio" id="radio2" name="gender" class="radio-input" value="female">
+                            <label for="radio2" class="radio-label">
+                                <span class="radio-inner-circle"></span>
+                                Female
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -123,6 +125,74 @@
         form {
             display: flex;
             flex-direction: column;
+        }
+
+        .radio-group {
+            display: flex;
+            height: 45px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            padding: 0.7em;
+            margin-bottom: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: background-color 0.2s, border-color 0.2s;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .radio-label:hover {
+            background-color: #313f52;
+        }
+
+        .radio-input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-input:checked+.radio-label {
+            background-color: #13253D;
+            border: 1.5px solid #fff;
+            box-shadow: rgba(0, 212, 255) 0px 0px 50px -15px;
+        }
+
+        .radio-input:focus+.radio-label {
+            outline: 2px solid #253d5b;
+        }
+
+        .radio-inner-circle {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            border: 2px solid rgb(255, 255, 255);
+            border-radius: 50%;
+            margin-right: 0.5em;
+            transition: border-color 0.2s;
+            position: relative;
+        }
+
+        .radio-label:hover .radio-inner-circle {
+            border-color: rgb(233, 233, 233);
+        }
+
+        .radio-input:checked+.radio-label .radio-inner-circle {
+            border-color: #ffffff;
+        }
+
+        .radio-input:checked+.radio-label .radio-inner-circle::after {
+            content: '';
+            display: block;
+            width: 0.5em;
+            height: 0.5em;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .button {
@@ -273,7 +343,7 @@
             animation-duration: 1.9s;
         }
     </style>
-    
+
     <script>
         window.requestAnimFrame = function() {
             return (
