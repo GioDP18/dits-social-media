@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>DITS SOCIAL MEDIA</title>
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -73,26 +73,25 @@
                         </div>
                     </form>
                     <ul class="panel-activity__list">
+                        @foreach ($posts as $post)
                         <li>
                             <i class="activity__list__icon fa fa-question-circle-o"></i>
                             <div class="activity__list__header">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
-                                <a href="#">Uploader Name</a> Posted: <span>chuchu hrs ago</span>
+                                <a href="#">{{ $post->users->first_name }} {{ $post->users->last_name }}</a> Posted: <span>{{ $post->created_at->format('g:ia F j, Y') }}</span>
                             </div>
                             <div class="activity__list__body entry-content">
                                 <p>
-                                    <strong>Lorem ipsum dolor sit amet</strong>, consectetur adipisicing elit.
-                                    Voluptatibus ab a nostrum repudiandae dolorem ut quaerat veniam asperiores, rerum
-                                    voluptatem magni dolores corporis!
-                                    <em>Molestiae commodi nesciunt a, repudiandae repellendus ea.</em>
+                                    {{ $post->caption }}
                                 </p>
                             </div>
                             <div class="activity__list__footer">
                                 <a href="#"> <i class="fa fa-thumbs-up"></i>0</a>
-                                <a href="#"> <i class="fa fa-comments"></i>0</a>
-                                <span> <i class="fa fa-clock"></i>2 hours ago</span>
+                                <a href="#"> <i class="fa fa-comments"></i>{{ $post->comments_count }}</a>
+                                <span> <i class="fa fa-clock"></i>{{ $post->created_at->format('g:ia F j, Y') }}</span>
                             </div>
                         </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

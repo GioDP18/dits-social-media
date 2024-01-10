@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -49,6 +50,13 @@ class UserController extends Controller
         $profile = User::find($id);
         return view('/components/pages/profilePage/profileTimeline', compact('profile'));
     }
+    
+    public function getPosts(){
+        $posts = Posts::with(['users', 'comments'])->withCount('comments')->get();
+        // dd($posts);
+        return view('/components/pages/profilePage/profileTimeline', ['posts' => $posts]);
+    }
+
     public function updateProfile($id)
     {
         $profile = User::find($id);
