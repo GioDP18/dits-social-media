@@ -9,9 +9,7 @@
 </head>
 <style>
     body {
-    color: #797979;
     background: #13253d;
-    font-family: 'Open Sans', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
     font-size: 13px;
@@ -338,26 +336,87 @@
 </style>
 <body>
 
+<div style="position:fixed; z-index:1; width:100%; background-color:white; top:0; padding:.5rem 1rem; box-shadow: 5px 3px 4px #818181; display:flex; justify-content:space-between; align-items:center;">
+        <div class="d-flex" style="gap:.5rem;">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('logo/dits.png') }}" alt="" style="width:3rem; height:3rem; border-radius:5px; box-shadow: 5px 3px 4px #818181;">
+            </a>
+            <h1 style="font-weight:bold; text-shadow: 5px 5px 4px #818181;">DITS TAMBAYAN</h1>
+        </div>
+        <div style="display:flex; gap:.5rem;">
+            <div>
+                <h5 style="color:#13253D;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+            </div>
+            <div style="position:relative; cursor:pointer;" onclick="triggerProfileOptions()">
+                <img src="{{ asset('storage/profile_images/'.Auth::user()->image) }}" alt="" style="border-radius:50%; width:2rem; height:2rem;">
+                <div id="profileOptions" style="display:none; position:absolute; background-color:gray; top:3rem; right:0; width:7rem; color:white; padding:0 .5rem; border-radius:10px;">
+                    <div style="position:absolute; background-color:gray; width:1rem; height:1rem; top:-.5rem; right:.7rem; transform:rotate(135deg)"></div>
+                    <li style="list-style:none; padding:.5rem;"><i class="fa-solid fa-user"></i> <a href="{{ route('update',  Auth::user()->id) }}" style="text-decoration:none; color:white;">Profile</a></li>
+                    <hr class="m-0">
+                    <li style="list-style:none; padding:.5rem;">
+                        <form method="post" action="{{ route('logout') }}">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" style="background-color:transparent; border:none; color:white; display:flex; gap:5px; text-align:right; align-items:center;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                        </form>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+<div style="height:5rem;" id="add"></div>
 <div class="container bootstrap snippets bootdey">
 <div class="row">
-  <div class="profile-nav col-md-3">
-      <div class="card">
-          <div class="user-heading round">
-              <a href="#">
-                  <img src="{{ asset('storage/'. $user->image) }}" alt="">
-              </a>
-              <h1>{{$user->first_name}} {{$user->last_name}}</h1>
-              <p>{{$user->email}}</p>
-          </div>
+    <div class="profile-nav col-md-3">
+        <div class="card">
+            <div class="user-heading round">
+                <a href="#">
+                    <img src="{{ asset('storage/'. $user->image) }}" alt="">
+                </a>
+                <h1>{{$user->first_name}} {{$user->last_name}}</h1>
+                <p>{{$user->email}}</p>
+            </div>
 
-          <ul class="nav nav-pills flex-column">
-              <li class="nav-item active"><a class="nav-link active" href="#"> <i class=" fa fa-user"></i> Profile</a></li>
-             
-              <li class="nav-item "><a class="nav-link" href="#"> <i class="fa fa-edit"></i> Posts</a></li>
-          </ul>
-      </div>
-  </div>
-  <div class="profile-info col-md-9">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item active"><a class="nav-link active" href="#"> <i class=" fa fa-user"></i> Profile</a></li>
+                
+                <li class="nav-item "><a class="nav-link" href="#"> <i class="fa fa-edit"></i> Posts</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="profile-info col-md-9">
+        <div class="card my-3">
+            <div class="card-content m-5">
+                <div class="row">
+                    <div class="col"> 
+                        <ul>
+                            <li>
+                                First Name: {{$user->first_name}}
+                            </li>
+                            <li>
+                                Last Name: {{$user->last_name}}
+                            </li>
+                            <li>
+                                Email: {{$user->email}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li>
+                                Gender: {{$user->gender}}
+                            </li>
+                            <li>
+                                Birth Date: {{$user->birthdate}}
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
         <div class="card">
           <form>
               <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
@@ -394,7 +453,7 @@
                 <p style="margin:0 1rem;">{{ $post->caption }}</p>
                 <img src="{{ asset('storage/'.$post->image) }}" alt="" style="width:20rem;">
             </div>
-            <div class="comments m-3 d-flex" style="justify-content:end; gap:1rem;">
+            <div class="comments m-3 py-2 d-flex" style="justify-content:end; gap:1rem;">
                 <form action="{{ route('like') }}" method="post">
                     @csrf
                     @method('POST')
@@ -408,10 +467,10 @@
                         @endif
                         @endforeach
                         ></i>
-                        <span style="width:.3rem;"></span> Likes: {{ $post->likes_count }}
+                        <span style="width:.3rem;"></span> Likes: {{ count($post->likes) }}
                     </button>
                 </form>
-                <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
+                <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ count($post->comments) }}</button>
             </div>
         </div>
         @endforeach

@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
 
+    // public function visitProfile($id){
     public function visitProfile($id){
-
         $user = User::find($id);
         $posts = User::find($id)->posts;
         $checkIfLiked = Likes::where('users_id', Auth::user()->id)->get();
