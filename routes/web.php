@@ -37,11 +37,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('comments/{id}', [CommentsController::class, 'retrieveComments'])->name('comments');
     Route::post('send/comment', [CommentsController::class, 'sendComment'])->name('sendComment');
     Route::get('profile/{id}', [PostsController::class, 'visitProfile'])->name('visitProfile');
+    Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');
+    Route::get('/profile-timeline/{id}', [UserController::class, 'getPosts'])->name('timeline');
 });
-
-
-
-
 
 
 
