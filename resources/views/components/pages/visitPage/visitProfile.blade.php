@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <style>
@@ -18,6 +18,60 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
+    }
+    .cssbuttons-io-button {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0.8em 1.5em 0.8em 1.2em;
+    color: white;
+    background: #ad5389;
+    background: linear-gradient(0deg, #12243B 0%, rgba(132,116,254,1) 100%);
+    border: none;
+    box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
+    letter-spacing: 0.05em;
+    border-radius: 20em;
+    }
+
+    .cssbuttons-io-button:hover {
+        box-shadow: 0 0.5em 1.5em -0.5em #4d36d0be;
+    }
+
+    .cssbuttons-io-button:active {
+        box-shadow: 0 0.3em 1em -0.5em #4d36d0be;
+    }
+
+    .comments-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+    border-radius: 30px;
+    border: 1px solid #8F9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+    }
+
+    .comments-btn:hover {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+    }
+
+    .comments-btn:active {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+    }
+
+    .comments-btn:focus {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
     }
     .profile-nav, .profile-info{
     margin-top:30px;   
@@ -290,10 +344,10 @@
       <div class="card">
           <div class="user-heading round">
               <a href="#">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                  <img src="{{ asset('storage/'. $user->image) }}" alt="">
               </a>
-              <h1>Camila Smith</h1>
-              <p>deydey@theEmail.com</p>
+              <h1>{{$user->first_name}} {{$user->last_name}}</h1>
+              <p>{{$user->email}}</p>
           </div>
 
           <ul class="nav nav-pills flex-column">
@@ -304,7 +358,7 @@
       </div>
   </div>
   <div class="profile-info col-md-9">
-      <div class="card">
+        <div class="card">
           <form>
               <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
           </form>
@@ -325,48 +379,52 @@
                   </li>
               </ul>
           </footer>
-      </div>
-      
-      </div>
-    <div class="col-md-3">
+        </div>
         @foreach ($posts as $post)
-        <div class="card shadow-lg p-3 mb-5 bg-body rounded">
-            <div class="card-body">
-                <div class="card-content">
-                    <p>{{$post->caption}}</p>
-                    
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <a href="#" class="link-offset-2 link-underline link-underline-opacity-0">
-                                <img src="{{$user->image}}" alt="image" style="width:2rem; height:2rem; border-radius:100%;">
-                            
-                            
-                                <small style="font-size: 0.2;">{{$user->firs_name}} {{$user->last_name}}</small>
-                            </a>
-                        </div>
-                        <div>
-                            <small style="font-size: 10px;">{{$post->created_at}}</small>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    
-                    <a href="#" id="pop" >
-                        <img id="imageresource" class="img-thumbnail" src="{{$post->image}}" alt="image">
-                    </a>
-                    
+        <div class="each-post" style="background-color:white; box-shadow: 5px 3px 4px #818181; width:90%; margin:auto; margin-top:1rem; border-radius:15px;">
+            <div class="uploader d-flex p-3 pb-0" style="align-items:center; gap:.8rem;">
+                <img src="{{ $post->users->image }}" alt="" style="border-radius:50%; width:2.2rem; height:2.2rem;">
+                <div style="display:flex; flex-direction:column">
+                    <span style="font-weight:bold; font-size:1.2rem;">{{ $post->users->first_name }} {{ $post->users->last_name }}</span>
+                    <small style="font-size:.8rem;"><i class="fa-solid fa-clock"></i> {{ $post->created_at->format('g:ia F j, Y') }}</small>
                 </div>
             </div>
+            <hr style="width:95%; margin:1rem auto">
+            <div class="images" style="margin:0 1rem;">
+                <p style="margin:0 1rem;">{{ $post->caption }}</p>
+                <img src="{{ asset('storage/'.$post->image) }}" alt="" style="width:20rem;">
+            </div>
+            <div class="comments m-3 d-flex" style="justify-content:end; gap:1rem;">
+                <form action="{{ route('like') }}" method="post">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="users_id" id="" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="posts_id" id="" value="{{ $post->id }}">
+                    <button type="submit" name="like" class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'">
+                        <i class="fa-solid fa-heart"
+                        @foreach ($checkIfLiked as $checkedIfLiked)
+                        @if ($checkedIfLiked->posts_id == $post->id)
+                             style="color:red"
+                        @endif
+                        @endforeach
+                        ></i>
+                        <span style="width:.3rem;"></span> Likes: {{ $post->likes_count }}
+                    </button>
+                </form>
+                <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
+            </div>
         </div>
+        @endforeach
+      
     </div>
   </div>
 </div>
-</div>
 
-    {{-- Bootstrap --}}
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    {{-- JQuery --}}
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>
