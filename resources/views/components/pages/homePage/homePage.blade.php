@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DITS SOCIAL MEDIA</title>
+    <title>DITS TAMBAYAN</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     {{-- Font Awesome --}}
@@ -138,22 +139,22 @@ body::-webkit-scrollbar{
                 <img src="{{ asset('storage/'.$post->image) }}" alt="" style="width:20rem;">
             </div>
             <div class="comments m-3 d-flex" style="justify-content:end; gap:1rem;">
-                <form action="{{ route('like') }}" method="post">
-                    @csrf
-                    @method('POST')
-                    <input type="hidden" name="users_id" id="" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="posts_id" id="" value="{{ $post->id }}">
-                    <button type="submit" name="like" class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'">
-                        <i class="fa-solid fa-heart"
+                {{-- <form action="{{ route('like') }}" method="post"> --}}
+                    {{-- @csrf --}}
+                    {{-- @method('POST') --}}
+                    {{-- <input type="hidden" name="users_id" id="" value="{{ Auth::user()->id }}"> --}}
+                    {{-- <input type="hidden" name="posts_id" id="" value="{{ $post->id }}"> --}}
+                    <button id="like_{{ $post->id }}" name="like" class="comments-btn" onclick="handleLike({{ $post->id }})">
+                        <i class="fa-solid fa-heart" id="likeIcon_{{ $post->id }}"
                         @foreach ($checkIfLiked as $checkedIfLiked)
                         @if ($checkedIfLiked->posts_id == $post->id)
                              style="color:red"
                         @endif
                         @endforeach
                         ></i>
-                        <span style="width:.3rem;"></span> Likes: {{ $post->likes_count }}
+                        <span style="width:.3rem;"></span> Likes: <span id="likeCount_{{ $post->id }}">{{ $post->likes_count }}</span>
                     </button>
-                </form>
+                {{-- </form> --}}
                 <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
             </div>
         </div>
@@ -210,6 +211,43 @@ body::-webkit-scrollbar{
             }
 
         }
+
+        function handleLike(posts_id){
+            // var users_id = {{ Auth::user()->id }}
+            var like_button = document.querySelector("#likeIcon_" + posts_id);
+            var like_count = document.querySelector("#likeCount_" + posts_id);
+            var typeCasted = parseInt(like_count.innerHTML);
+            $.ajax({
+                url: '/like',
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    users_id: {{ Auth::user()->id }},
+                    posts_id: posts_id
+                },
+                success: function (response) {
+                    if(response.like){
+                        like_button.style.color = 'red';
+                        typeCasted += 1;
+                        like_count.innerHTML = typeCasted;
+                    }
+                    else{
+                        like_button.style.color = '#606060';
+                        typeCasted -= 1;
+                        like_count.innerHTML = typeCasted;
+                    }
+                    // Your logic to handle the response
+
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
     </script>
 
     {{-- Bootstrap --}}

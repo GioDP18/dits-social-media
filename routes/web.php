@@ -33,6 +33,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/update/{id}', [UserController::class, 'updateProfile'])->name('update');
     Route::put('/update-profile/{id}', [UserController::class, 'submitupdateProfile'])->name('submitUpdate');
     Route::post('/like', [LikesController::class, 'like'])->name('like');
+    // Route::post('/like', [PostsController::class, 'visitProlikefile'])->name('like');
     Route::get('comments/{id}', [CommentsController::class, 'retrieveComments'])->name('comments');
     Route::post('send/comment', [CommentsController::class, 'sendComment'])->name('sendComment');
     Route::get('profile/{id}', [PostsController::class, 'visitProfile'])->name('visitProfile');

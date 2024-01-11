@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
 
-    public function visitProfile($id){
+    // public function visitProfile($id){
 
-        $user = User::find($id);
-        $posts = User::find($id)->posts;
-        return view('components/pages/visitPage/visitProfile', ['user'=>$user, 'posts'=>$posts]);
-    }
+    //     $user = User::find($id);
+    //     $posts = User::find($id)->posts;
+    //     return view('components/pages/visitPage/visitProfile', ['user'=>$user, 'posts'=>$posts]);
+    // }
 
     public function getPosts(){
         $posts = Posts::with(['users', 'comments', 'likes'])->withCount('comments', 'likes')->orderBy('created_at', 'DESC')->get();

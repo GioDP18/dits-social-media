@@ -18,10 +18,10 @@ class LikesController extends Controller
                 'users_id' => $request->input('users_id'),
                 'posts_id' => $request->input('posts_id')
             ]);
-            return back();
+            return response()->json(['like' => true]);
         } else {
             Likes::where('users_id', $request->input('users_id'))->where('posts_id', $request->input('posts_id'))->delete();
-            return back();
+            return response()->json(['like' => false]);
         }
     }
 }
