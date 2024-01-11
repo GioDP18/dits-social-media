@@ -17,7 +17,6 @@ class Posts extends Model
         'id',
         'users_id',
         'caption',
-        'image',
         'created_at'
     ];
 
@@ -31,6 +30,10 @@ class Posts extends Model
 
     public function comments(){
         return $this->hasMany(Comments::class);
+    }
+
+    public function postImages(){
+        return $this->hasMany(PostImages::class);
     }
 
 }

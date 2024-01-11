@@ -118,12 +118,13 @@ body::-webkit-scrollbar{
     <div style="margin:1rem 1rem;">
         {{-- All Buttons here --}}
         <!-- Button for Adding New Post -->
-        <button ype="button" class="cssbuttons-io-button" data-bs-toggle="modal" data-bs-target="#addPost">
+        <button type="button" class="cssbuttons-io-button" data-bs-toggle="modal" data-bs-target="#addPost">
             <span>Add New Post</span>
         </button>
     </div>
 
     <div class="posts-div" style="display:flex; justify-content:center; flex-direction:column; margin-bottom:1rem;">
+        {{ $likeOrLiked = "Like" }}
         @foreach ($posts as $post)
         <div class="each-post" style="background-color:white; box-shadow: 5px 3px 4px #818181; width:90%; margin:auto; margin-top:1rem; border-radius:15px;">
             <div class="uploader d-flex p-3 pb-0" style="align-items:center; gap:.8rem;">
@@ -136,26 +137,60 @@ body::-webkit-scrollbar{
             <hr style="width:95%; margin:1rem auto">
             <div class="images" style="margin:0 1rem;">
                 <p style="margin:0 1rem;">{{ $post->caption }}</p>
-                <img src="{{ asset('storage/'.$post->image) }}" alt="" style="width:20rem;">
+                <div class="d-flex" style="overflow-y:auto; gap:10px;">
+                    @foreach ($getPostImages as $getPostImage)
+                        @if ($getPostImage->posts_id == $post->id)
+                            <img src="{{ asset('storage/'.$getPostImage->image) }}" alt="" style="width:30rem;">
+                        @endif
+                    @endforeach
+
+                </div>
             </div>
-            <div class="comments m-3 d-flex" style="justify-content:end; gap:1rem;">
-                {{-- <form action="{{ route('like') }}" method="post"> --}}
-                    {{-- @csrf --}}
-                    {{-- @method('POST') --}}
-                    {{-- <input type="hidden" name="users_id" id="" value="{{ Auth::user()->id }}"> --}}
-                    {{-- <input type="hidden" name="posts_id" id="" value="{{ $post->id }}"> --}}
+            <div class="comments d-flex" style="justify-content:space-between; gap:1rem; margin:3rem 1rem 1rem 1rem;">
+                <div>
+                    <button type="button" class="comments-btn" style="width:18rem;" data-bs-toggle="modal" data-bs-target="#seeLikes_{{ $post->id }}"> See people who liked this post: <span id="likeCount_{{ $post->id }}" style="margin-left:3px; font-weight:bold">{{ $post->likes_count }}</span></button>
+                </div>
+                <div class="d-flex" style="gap:1rem">
                     <button id="like_{{ $post->id }}" name="like" class="comments-btn" onclick="handleLike({{ $post->id }})">
                         <i class="fa-solid fa-heart" id="likeIcon_{{ $post->id }}"
                         @foreach ($checkIfLiked as $checkedIfLiked)
                         @if ($checkedIfLiked->posts_id == $post->id)
-                             style="color:red"
+                            {{ $likeOrLiked = "Liked" }}
+                                style="color:red"
+                        @else
+                            {{ $likeOrLiked = "Like" }}
                         @endif
                         @endforeach
                         ></i>
-                        <span style="width:.3rem;"></span> Likes: <span id="likeCount_{{ $post->id }}">{{ $post->likes_count }}</span>
+                        <span style="width:.3rem;"></span> {{ $likeOrLiked }}
                     </button>
-                {{-- </form> --}}
-                <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
+                    <button class="comments-btn" onclick="location.href='/comments/{{ $post->id }}'"><i class="fa-solid fa-comment"></i> <span style="width:.3rem;"></span> Comments: {{ $post->comments_count }}</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- Modal to see peop;e who liked post -->
+        <div class="modal fade" id="seeLikes_{{ $post->id }}" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"> People who liked this post</h1>
+                        </div>
+                        <div>
+                            <h1 class="modal-title fs-5"><i class="fa-solid fa-heart" style="color:red"></i>12</h1>
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($likes as $like)
+                            {{-- @if ($like->users->posts_id == $post->id) --}}
+                                <li>{{ $like->users->posts_id }}</li>
+                            {{-- @endif --}}
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
         @endforeach
@@ -185,7 +220,7 @@ body::-webkit-scrollbar{
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label" style="font-weight:bold">Upload Image</label>
-                                <input type="file" class="form-control" name="image" id="image" accept="image/jpeg, image/png, image/jpg, image/gif"/>
+                                <input type="file" class="form-control" name="images[]" id="image" accept="image/jpeg, image/png, image/jpg, image/gif" multiple/>
                             </div>
                         </div>
                         <div class="modal-footer">
